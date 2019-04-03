@@ -1,4 +1,20 @@
-# CodingInterviewChinese2-for-Python
-剑指offer【所有题目】 Python解答
+CodingInterviewChinese2-for-Python
+===========================
+Last update 16,July,2018</br>
+|Author|landerous|
+|---|---
+|E-mail|landerous@foxmail.com
 
-目前GitHub上剑指Offer第二版的Python代码版本，仅是对某一面试题中的经典题目进行解答，并未对所有题目进行简单，如面试题10仅对题目一：求斐波那契数列的前n项进行解答，并未对题目二：青蛙跳台阶问题解答，因此，参照书中的源代码，将其改写为Python版本。
+> 本项目参考《剑指offer》书中的源代码，将所有题目的解法改写为Python版本。
+
+优点在于以下3点：
+1. 对部分题目扩充相关解法，如利用黄金分割公式求解Fibonacci数列
+2. 比较各解法的运行时间
+3. 包括《剑指offer》所有题目的求解代码
+
+****
+
+# 已完成
+#### 题10
+- [x] 10-1 求斐波那契数列的第n项
+- [x] 10-2 青蛙跳台阶问题
