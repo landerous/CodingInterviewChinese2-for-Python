@@ -1,6 +1,7 @@
 CodingInterviewChinese2-for-Python
 ===========================
 Last update 16,July,2018</br>
+
 |Author|landerous|
 |---|---
 |E-mail|landerous@foxmail.com
@@ -15,6 +16,6 @@ Last update 16,July,2018</br>
 ****
 
 # 已完成
-#### 题10
+#### 面试题10
 - [x] 10-1 求斐波那契数列的第n项
 - [x] 10-2 青蛙跳台阶问题
