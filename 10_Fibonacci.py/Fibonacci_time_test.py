@@ -112,3 +112,110 @@ print(min(test3_1.repeat(repeat=5,number=10000)))
 #测试：方法4：基于黄金分割公式
 test4 = timeit.Timer('Fibonacci_Solution4(10)','from __main__ import Fibonacci_Solution4')
 print(min(test4.repeat(repeat=5,number=10000)))
+
+"""
+// 算法的运行时间分析
+""" 
+def runtime_analysis(method_string_run,fibonacci_n_run,repeat_run=3,number_run=100):
+    """
+    功能：对算法进行运行时间分析
+    输入：method_string_run - 算法字符串列表
+         fibonacci_n_run - 测试的斐波那契数列的n组成的列表
+         repeat_f（timeit.repeat里的参数repeat）
+         number_f（timeit.repeat里的参数number）
+    输出：time_run - 运行时间统计
+    """
+    method_len = len(method_string_run) 
+    number_len = len(fibonacci_n_run)
+    time_run = np.zeros((method_len,number_len))
+    
+    """计算不同输入对算法运行时间的影响"""
+    for method_i in range(method_len): #每一种方法
+        
+        method_string_i = method_string_run[method_i]
+        
+        for num_i in range(number_len): #每一个数字n
+            
+            number_test_i = fibonacci_n_run[num_i]
+            
+            test = timeit.Timer('Fibonacci_Solution%s(%d)' %(method_string_i,number_test_i),'from __main__ import Fibonacci_Solution%s' %method_string_i)
+            time_run[method_i][num_i] = min(test.repeat(repeat=repeat_run,number=number_run))
+            
+    return time_run
+
+import matplotlib.pyplot as plt
+
+"""----算法的运行时间分析1：方法 1：递归的运行时间分析"""
+method_string_1 = ['1'] ##计算斐波那契数列的方法的函数名后缀
+fiboncci_n_test_1 = range(1,25,5)  #计算斐波那契数列的第n项的n——38
+time_running_1 = runtime_analysis(method_string_1,fiboncci_n_test_1,number_run=1)
+
+#创建图片，并添加文本
+fig = plt.figure()
+
+#画折线图
+line1_1,=plt.plot(fiboncci_n_test_1,time_running_1[0][:],'bs-')
+
+#添加图例
+line_list = [line1_1]
+line_list_legend = ['1-recursion']
+plt.legend(line_list,line_list_legend,loc='upper left')
+
+#设置横纵轴的名称
+plt.xlabel("Fibonacci n-th")
+plt.ylabel("Time/s")
+plt.title("Running Time Analysis of Recursion\nrepeat = 3  number = 1")
+
+plt.show()
+
+"""----算法的运行时间分析2：各算法的运行时间分析："""
+method_string_2 = ['1','2_1','2_2','3_1','4'] ##计算斐波那契数列的方法的函数名后缀
+fiboncci_n_test_2 = range(1,17,5)  #计算斐波那契数列的第n项的n
+time_running_2 = runtime_analysis(method_string_2,fiboncci_n_test_2,number_run=100)
+
+#创建图片，并添加文本
+fig = plt.figure()
+
+#画折线图
+line1_2,=plt.plot(fiboncci_n_test_2,time_running_2[0][:],'bs-')
+line2_1_2,=plt.plot(fiboncci_n_test_2,time_running_2[1][:],'rs-')
+line2_2_2,=plt.plot(fiboncci_n_test_2,time_running_2[2][:],'ys-')
+line3_1_2,=plt.plot(fiboncci_n_test_2,time_running_2[3][:],'ks-')
+line4_2,=plt.plot(fiboncci_n_test_2,time_running_2[4][:],'ms-')
+
+line_list = [line1_2,line2_1_2,line2_2_2,line3_1_2,line4_2]
+line_list_legend = ['1-recursion','2-1_loop','2-2_loop with list','3-1_Matrix multiplication','4-Golden Section Formula']
+#['1-递归','2-1_循环','2-2_list循环','3-1_矩阵乘法','4-黄金分割公式']
+plt.legend(line_list,line_list_legend,loc='upper left')
+
+#设置横纵轴的名称
+plt.xlabel("Fibonacci n-th")
+plt.ylabel("Time/s")
+plt.title("Running Time Analysis of Different Algorithms\nrepeat = 3  number = 100")
+plt.show()
+
+
+"""----算法的运行时间分析3：除递归解法外的各算法的运行时间分析："""
+method_string_3 = ['2_1','2_2','3_1','4'] ##计算斐波那契数列的方法的函数名后缀
+fiboncci_n_test_3 = range(1,17,5)  #计算斐波那契数列的第n项的n
+time_running_3 = runtime_analysis(method_string_3,fiboncci_n_test_3,number_run=100)
+
+#创建图片，并添加文本
+fig = plt.figure()
+
+#画折线图
+line2_1_3,=plt.plot(fiboncci_n_test_3,time_running_3[0][:],'rs-')
+line2_2_3,=plt.plot(fiboncci_n_test_3,time_running_3[1][:],'ys-')
+line3_1_3,=plt.plot(fiboncci_n_test_3,time_running_3[2][:],'ks-')
+line4_3,=plt.plot(fiboncci_n_test_3,time_running_3[3][:],'ms-')
+
+line_list = [line2_1_3,line2_2_3,line3_1_3,line4_3]
+line_list_legend = ['2-1_loop','2-2_loop with list','3-1_Matrix multiplication','4-Golden Section Formula']
+#['2-1_循环','2-2_list循环','3-1_矩阵乘法','4-黄金分割公式']
+plt.legend(line_list,line_list_legend,loc='upper left')
+
+#设置横纵轴的名称
+plt.xlabel("Fibonacci n-th")
+plt.ylabel("Time/s")
+plt.title("Running Time Analysis of Different Algorithms (except Recursion) \nrepeat = 3  number = 100")
+plt.show()
